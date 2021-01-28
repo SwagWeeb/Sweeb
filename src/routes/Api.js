@@ -7,7 +7,7 @@ router.get('/:category', async function(req, res) {
     if (!req.params) return res.status(403).json({ error: 'Choose a correct path' });
     const categoryFix = req.params.category;
 
-    if (!client.global.categories.includes(categoryFix.toUpperCase())) return res.status(403).json({ error: 'unauthorized' });
+    if (!req.locals.client.global.categories.includes(categoryFix.toUpperCase())) return res.status(403).json({ error: 'unauthorized' });
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     if (!req.headers.authorization) return res.status(403).json({ error: 'no_token' });
     if (req.headers.authorization !== process.env.SERVER_KEY) return res.status(403).json({ error: 'unauthorized' });
