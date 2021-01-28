@@ -7,7 +7,7 @@ const readdir = promisify(require("fs").readdir);
 const cfg = require('./config');
 const Discord = require('discord.js');
 const client = new Discord.Client({fetchAllMembers: false,disabledEvents: ['TYPING_START', 'TYPING_STOP', 'RELATIONSHIP_ADD', 'RELATIONSHIP_REMOVE', 'USER_NOTE_UPDATE', 'VOICE_SERVER_UPDATE', 'GUILD_MEMBER_SPEAKING', 'USER_NOTE_UPDATE', 'VOICE_STATE_UPDATE', 'GUILD_BAN_ADD', 'GUILD_BAN_REMOVE'],http: { api: 'https://discordapp.com/api', version: 7 },disableEveryone: true,messageCacheMaxSize: 1,messageCacheLifetime: 1,messageSweepInterval: 1})
-client.global = {}
+client.global = {},client.global.wbk = new Discord.WebhookClient(process.env.BOT_WEBHOOK_ID, process.env.BOT_WEBHOOK_TOKEN);
 client.commands = new Discord.Collection(),client.aliases = new Discord.Collection(),client.cooldown = new Discord.Collection(),client.config = cfg;
 require('./functions/global')(client);
 app.set('trust proxy', 1);
