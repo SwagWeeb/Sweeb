@@ -12,6 +12,18 @@ client.commands = new Discord.Collection(),client.aliases = new Discord.Collecti
 require('./functions/global')(client);
 app.set('trust proxy', 1);
 
+// File logging from AJ/TheOnlyKirb
+const moment = require("moment");
+const fs = require("fs");
+var util = require('util');
+const timestamps = `${moment().format("MM-DD-YYYY")}`
+var logFile = fs.createWriteStream(`./src/logs/log-${timestamps}.txt`, { flags: 'a' });
+var logStdout = process.stdout;
+console.log = function () {
+  logFile.write(util.format.apply(null, arguments) + '\n');
+  logStdout.write(util.format.apply(null, arguments) + '\n');
+}
+
 // basic rateLimiting
 const apiLimiter = rateLimit({
     windowMs: 10 * 60 * 1000, // 10 minutes
@@ -26,14 +38,14 @@ async function routing() {
 }
 async function bot(client) {
     const cmds = await readdir("./src/bot/commands/");
-    console.log(`[Sweeb] Loading a total of ${cmds.length} commands.`);
+    client.global.log(`[Sweeb] Loading a total of ${cmds.length} commands.`);
     cmds.forEach(f => {
         if (!f.endsWith(".js")) return;
         const response = client.loadCommand(f);
         if (response) console.log(response);
     });
     const event = await readdir("./src/bot/events/");
-    console.log(`[Sweeb] Loading a total of ${event.length} events.`);
+    client.global.log(`[Sweeb] Loading a total of ${event.length} events.`);
     event.forEach(file => {
         const eventName = file.split(".")[0];
         const event = require(`./bot/events/${file}`);
@@ -43,23 +55,23 @@ async function bot(client) {
     try {
         client.login(process.env.BOT_KEY);
     } catch (err) {
-        console.log("[Sweeb] Oops we hit a snag", err)
+        client.global.error("[Sweeb] Oops we hit a snag " + err)
         procces.exit(1);
     }
 }
 
 app.use(function (req, res, next) {res.locals.client = client;next();})
 (async() => {
-    app.listen(process.env.SERVER_PORT, () => console.log("[Sweeb] Started server on port", process.env.SERVER_PORT))
+    app.listen(process.env.SERVER_PORT, () => client.global.log("[Sweeb] Started server on port", process.env.SERVER_PORT))
 
     routing();
     bot(client);
 })
 
 process.on('uncaughtException', (error) => {
-    console.log('something terrible happened: ', error);
+    client.global.error('something terrible happened: ' + error);
 })
 process.on('unhandledRejection', (error, promise) => {
-    console.log(' promise rejection here: ', promise);
-    console.log(' The error was: ', error);
+    client.global.error(' promise rejection here: ' + promise);
+    client.global.error(' The error was: ' + error);
 });
