@@ -6,6 +6,7 @@ module.exports = (client) => {
     client.global.truncate = require('./truncate'),
     client.global.message = new Embed(client),
     client.global.db = require('../database/mysql'),
+    client.global.categories = ["Pat", "Hug", "Kiss", "Highfive", "Heart", "Cry"],
 
     client.permlevel = (message) => {
         let permlvl = 0;

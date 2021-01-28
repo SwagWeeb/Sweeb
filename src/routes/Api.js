@@ -3,14 +3,18 @@ router = express.Router();
 const log =  require('../functions/log');
 const db = require('../database/mysql');
 
-router.get('/pat', async function(req, res) {
+router.get('/:category', async function(req, res) {
+    if (!req.params) return res.status(403).json({ error: 'Choose a correct path' });
+    const categoryFix = req.params.category;
+
+    if (!client.global.categories.includes(categoryFix.toUpperCase())) return res.status(403).json({ error: 'unauthorized' });
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     if (!req.headers.authorization) return res.status(403).json({ error: 'no_token' });
     if (req.headers.authorization !== process.env.SERVER_KEY) return res.status(403).json({ error: 'unauthorized' });
-    const pat = db.query(`SELECT * FROM sweebData WHERE category = "Pat"`)
+    const pat = db.query(`SELECT * FROM sweebData WHERE category = "${categoryFix.toUpperCase()}"`)
 
-    log.log(`[Sweeb] /pat/ requested by ${ip}`)
-    res.status(200).json({url: pat[Math.floor(Math.random()*pat.length)].fileLink})
+    log.log(`[Sweeb] /${categoryFix.toUpperCase()}/ requested by ${ip}`)
+    res.status(200).json({category: pat[Math.floor(Math.random()*pat.length)].category, url: pat[Math.floor(Math.random()*pat.length)].fileLink})
 })
 
 router.get('/upload/:ID/:File', function(req, res) {
