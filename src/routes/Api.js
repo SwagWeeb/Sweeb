@@ -2,7 +2,7 @@ const express = require('express');
 router = express.Router();
 
 router.get('/pat', function(req, res) {
-    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    //const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     if (!req.headers.authorization) return res.status(403).json({ error: 'no_token' });
     if (req.headers.authorization !== process.env.SERVER_KEY) return res.status(403).json({ error: 'unauthorized' });
 })

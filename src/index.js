@@ -29,49 +29,58 @@ const apiLimiter = rateLimit({
     windowMs: 10 * 60 * 1000, // 10 minutes
     max: 100,
     message: "Too many requests exceeded, please try again in 10 minutes"
-  });
+});
 
 async function routing() {
     console.log("[Sweeb] Add routes");
     app.use('/api/v1', api)
     app.use("/api/", apiLimiter);
+    app.use("/test", (req, res) => res.send("EEEEE"))
 }
 async function bot(client) {
-    const cmds = await readdir("./src/bot/commands/");
-    client.global.log(`[Sweeb] Loading a total of ${cmds.length} commands.`);
+    const cmds = await readdir("./src/bot/commands/run/");
+    client.global.log.log(`[Sweeb] Loading a total of ${cmds.length} commands.`);
     cmds.forEach(f => {
         if (!f.endsWith(".js")) return;
         const response = client.loadCommand(f);
         if (response) console.log(response);
     });
     const event = await readdir("./src/bot/events/");
-    client.global.log(`[Sweeb] Loading a total of ${event.length} events.`);
+    client.global.log.log(`[Sweeb] Loading a total of ${event.length} events.`);
     event.forEach(file => {
         const eventName = file.split(".")[0];
         const event = require(`./bot/events/${file}`);
         client.on(eventName, event.bind(null, client));
     });
 
+    client.levelCache = {};
+    for (let i = 0; i < client.config.permLevels.length; i++) {
+      const thisLevel = client.config.permLevels[i];
+      client.levelCache[thisLevel.name] = thisLevel.level;
+    }
+
     try {
-        client.login(process.env.BOT_KEY);
+        client.login(process.env.BOT_TOKEN);
     } catch (err) {
-        client.global.error("[Sweeb] Oops we hit a snag " + err)
+        client.global.log.error("[Sweeb] Oops we hit a snag " + err)
         procces.exit(1);
     }
 }
 
-app.use(function (req, res, next) {res.locals.client = client;next();})
-(async() => {
-    app.listen(process.env.SERVER_PORT, () => client.global.log("[Sweeb] Started server on port", process.env.SERVER_PORT))
-
-    routing();
-    bot(client);
+app.use(function(req, res, next) {
+    res.locals.client = client;
+    next();
 })
+
+routing();
+app.listen(process.env.SERVER_PORT, () => client.global.log.log("[Sweeb] Started server on port", process.env.SERVER_PORT))
+
+bot(client);
 
 process.on('uncaughtException', (error) => {
-    client.global.error('something terrible happened: ' + error);
+    client.global.log.error('something terrible happened: ' + error);
 })
 process.on('unhandledRejection', (error, promise) => {
-    client.global.error(' promise rejection here: ' + promise);
-    client.global.error(' The error was: ' + error);
+    client.global.log.error(' promise rejection here: ' + promise);
+    client.global.log.error(' The error was: ' + error);
 });
