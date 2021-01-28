@@ -8,5 +8,5 @@ create table if not exists sweebData
     fileSize varchar(10) default '0MB' null,
     fileName text null,
     fileDir text null,
-    cdnLink text not null
+    fileLink text not null
 );
