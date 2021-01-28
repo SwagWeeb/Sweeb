@@ -1,0 +1,32 @@
+{
+  "name": "sweeb",
+  "version": "1.0.0",
+  "description": "Swag",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node src/index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SwagWeeb/Sweeb.git"
+  },
+  "keywords": [
+    "Swag",
+    "Anime",
+    "Dweeb",
+    "Weeb",
+    "Sweeb"
+  ],
+  "author": "DopeDealers",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SwagWeeb/Sweeb/issues"
+  },
+  "homepage": "https://github.com/SwagWeeb/Sweeb#readme",
+  "dependencies": {
+    "discord.js": "^12.5.1",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.2.3",
+    "promise-mysql": "^5.0.2"
+  }
+}
