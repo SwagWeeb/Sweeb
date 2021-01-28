@@ -1,10 +1,16 @@
 const express = require('express');
 router = express.Router();
+const log =  require('../functions/log');
+const db = require('../database/mysql');
 
-router.get('/pat', function(req, res) {
-    //const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+router.get('/pat', async function(req, res) {
+    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     if (!req.headers.authorization) return res.status(403).json({ error: 'no_token' });
     if (req.headers.authorization !== process.env.SERVER_KEY) return res.status(403).json({ error: 'unauthorized' });
+    const pat = db.query(`SELECT * FROM sweebData WHERE category = "Pat"`)
+
+    log.log(`[Sweeb] /pat/ requested by ${ip}`)
+    res.status(200).json({url: pat[Math.floor(Math.random()*pat.length)].fileLink})
 })
 
 router.get('/upload/:ID/:File', function(req, res) {

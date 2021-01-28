@@ -354,3 +354,4 @@ MigrationBackup/
 
 # Remove sensitive data
 ecosystem.config.js
+docker-compose.yml
