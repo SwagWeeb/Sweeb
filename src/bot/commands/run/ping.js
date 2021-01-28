@@ -8,7 +8,8 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     enabled: true,
     guildOnly: false,
     aliases: [],
-    permLevel: "User"
+    permLevel: "User",
+    cooldown: 3
   };
   
   exports.help = {
