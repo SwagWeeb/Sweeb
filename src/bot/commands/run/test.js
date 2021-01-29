@@ -15,7 +15,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
   };
   
   exports.help = {
-    name: "ping",
+    name: "test",
     category: "System",
     description: "Get bots ping",
     usage: "ping"
