@@ -5,8 +5,9 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     if (!client.global.categories.includes(args[0].toProperCase())) return client.global.message.error(message, "not_category", `Not a valid category!\n do \`sw!categories\` to see a list!`, "(NOT_A_CATEGORY)");
     if (!client.global.isUrl(args[1])) return client.global.message.error(message, "not_url", "Not a valid url!", "(NOT_A_URL)");
     
-    var val = (args[2].toLowerCase() === false);
+    var val = args[2].toLowerCase() === false;
     if (typeof val !== "boolean") return client.global.message.error(message, "not_bool", "Not a boolean! for NSFW tag use \`true/false\`!", "(NOT_A_BOOLEAN)");
+    client.global.log.log(val)
     const date = new Date();
     client.global.db.query(`INSERT INTO 
     sweebData 
