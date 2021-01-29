@@ -13,6 +13,9 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     
     client.global.db.query(`INSERT INTO 
     sweebData (id, category, nsfw, date, fileLink) VALUES (${client.global.createId(30)}, ${args[0].toProperCase()}, ${args[2].toLowerCase()}, ${datetime}, ${client.global.escapeDB(args[1])})`)
+    .on('result', function (row) {
+      console.log(row);
+    })
     .on('error', function (err) {
       console.log(err);
     });
