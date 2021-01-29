@@ -9,9 +9,9 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     var val = args[2].toLowerCase() === false;
     if (typeof val !== "boolean") return client.global.message.error(message, "not_bool", "Not a boolean! for NSFW tag use \`true/false\`!", "(NOT_A_BOOLEAN)");
     const moment = require('moment')
-    const timestamps = moment.format("MM-DD-YYYY")
+    const timestamp = moment().format("YYYY-MM-DD");
     
-    client.global.db.query(`INSERT INTO sweebData (id, category, nsfw, dateAdded, fileLink) VALUES (${client.global.createId(20)}, "${args[0].toProperCase()}", ${args[2].toLowerCase()}, STR_TO_DATE(${timestamps}, '%d-%m-%Y'), "${args[1]}")`)
+    client.global.db.query(`INSERT INTO sweebData (id, category, nsfw, dateAdded, fileLink) VALUES (${client.global.createId(20)}, "${args[0].toProperCase()}", ${args[2].toLowerCase()}, STR_TO_DATE('${timestamp}', '%d-%m-%Y'), "${args[1]}")`)
 
 
     client.global.message.success(message, "Upload", `Successfully uploaded the image to /\`${args[0]}\`/`);
