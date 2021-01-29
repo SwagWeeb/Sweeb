@@ -6,4 +6,4 @@ create table if not exists sweebData
     dateAdded date,
     fileLink text null
 );
-INSERT INTO sweebData (id, category, nsfw, dateAdded, fileLink) VALUES (38793678439003, "Pat", false, STR_TO_DATE('1-01-2012', '%d-%m-%Y'), "https://img.com")
+INSERT INTO sweebData (id, category, nsfw, dateAdded, fileLink) VALUES (46133452143714, "Pat", false, STR_TO_DATE('2021-01-29', '%Y-%m-%d'), "https://tenor.com/MLKi.gif")

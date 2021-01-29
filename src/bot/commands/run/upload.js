@@ -11,7 +11,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     const moment = require('moment')
     const timestamp = moment().format("YYYY-MM-DD");
     
-    client.global.db.query(`INSERT INTO sweebData (id, category, nsfw, dateAdded, fileLink) VALUES (${client.global.createId(14)}, "${args[0].toProperCase()}", false, STR_TO_DATE('${timestamp}', '%d-%m-%Y'), "${args[1]}")`)
+    client.global.db.query(`INSERT INTO sweebData (id, category, nsfw, dateAdded, fileLink) VALUES (${client.global.createId(14)}, "${args[0].toProperCase()}", false, STR_TO_DATE(${timestamp}, '%Y-%m-%d'), "${args[1]}")`)
 
 
     client.global.message.success(message, "Upload", `Successfully uploaded the image to /\`${args[0]}\`/`);
