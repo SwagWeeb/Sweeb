@@ -4,7 +4,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     if (!args[2]) return client.global.message.error(message, "no_arg", `You did not provide any arguments! \`sw!upload <Link> <Category> <true:false>\``, "(NO_ARG)");
     if (!client.global.categories.includes(args[0].toProperCase())) return client.global.message.error(message, "not_category", `Not a valid category!\n do \`sw!categories\` to see a list!`, "(NOT_A_CATEGORY)");
     if (!client.global.isUrl(args[1])) return client.global.message.error(message, "not_url", "Not a valid url!", "(NOT_A_URL)");
-    if (typeof args[2] !== Boolean) return client.global.message.error(message, "not_bool", "Not a boolean! for NSFW tag use \`true/false\`!", "(NOT_A_BOOLEAN)");
+    if (typeof args[2] !== "boolean") return client.global.message.error(message, "not_bool", "Not a boolean! for NSFW tag use \`true/false\`!", "(NOT_A_BOOLEAN)");
     const date = new Date();
     client.global.db.query(`INSERT INTO 
     sweebData 
