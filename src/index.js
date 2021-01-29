@@ -68,7 +68,7 @@ async function bot(client) {
 }
 
 app.use(function(req, res, next) {
-    res.locals.client = client;
+    res.locals.bot = client;
     next();
 })
 

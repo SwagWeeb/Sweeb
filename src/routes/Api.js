@@ -7,26 +7,27 @@ router.get('/:category', async function(req, res) {
     if (!req.params) return res.status(403).json({ error: 'Choose a correct path' });
     const categoryFix = req.params.category;
 
-    if (!req.locals.client.global.categories.includes(categoryFix.toUpperCase())) return res.status(403).json({ error: 'unauthorized' });
+    if (!res.locals.bot.global.categories.includes(categoryFix.toUpperCase())) return res.status(403).json({ error: 'unauthorized' });
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    log.log(`[Sweeb] /${categoryFix.toUpperCase()}/ requested by ${ip}`)
     if (!req.headers.authorization) return res.status(403).json({ error: 'no_token' });
     if (req.headers.authorization !== process.env.SERVER_KEY) return res.status(403).json({ error: 'unauthorized' });
-    const pat = db.query(`SELECT * FROM sweebData WHERE category = "${categoryFix.toUpperCase()}"`)
+    const cat = db.query(`SELECT * FROM sweebData WHERE category = "${categoryFix.toUpperCase()}"`),
+    random = cat[Math.floor(Math.random()*cat.length)];
 
-    log.log(`[Sweeb] /${categoryFix.toUpperCase()}/ requested by ${ip}`)
-    res.status(200).json({category: pat[Math.floor(Math.random()*pat.length)].category, url: pat[Math.floor(Math.random()*pat.length)].fileLink})
+   // res.status(200).json({category: random.category, url: random.fileLink})
 })
 
 router.get('/upload/:ID/:File', function(req, res) {
     if (!req.headers.authorization) return res.status(403).json({ error: 'no_token' });
     if (req.headers.authorization !== process.env.SERVER_KEY) return res.status(403).json({ error: 'unauthorized' });
-    if (!req.locals.client.config.uploaders.includes(req.params.IDS)) return res.status(403).json({ error: 'unauthorized' });
+    if (!req.locals.bot.config.uploaders.includes(req.params.IDS)) return res.status(403).json({ error: 'unauthorized' });
 })
 
 router.get('/delete/:ID/:File', function(req, res) {
     if (!req.headers.authorization) return res.status(403).json({ error: 'no_token' });
     if (req.headers.authorization !== process.env.SERVER_KEY) return res.status(403).json({ error: 'unauthorized' });
-    if (!req.locals.client.config.staffIDS.includes(req.params.IDS)) return res.status(403).json({ error: 'unauthorized' });
+    if (!req.locals.bot.config.staffIDS.includes(req.params.IDS)) return res.status(403).json({ error: 'unauthorized' });
 })
 
 module.exports = router;
