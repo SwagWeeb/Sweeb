@@ -9,10 +9,8 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     if (typeof val !== "boolean") return client.global.message.error(message, "not_bool", "Not a boolean! for NSFW tag use \`true/false\`!", "(NOT_A_BOOLEAN)");
     client.global.log.log(val)
     var datetime = new Date().toLocaleString();
-    client.global.db.query(`INSERT INTO 
-    sweebData 
-    (id, category, nsfw, date, fileLink) 
-    VALUES (${client.global.createId(30)}, ${args[0].toProperCase()}, ${args[2].toLowerCase()}, ${datetime}, ${client.global.escapeDB(args[1])})`)
+    const dataPic = {id: client.global.createId(30), category: args[0].toProperCase(), nsfw: args[2].toLowerCase(), date: datetime, fileLink: args[1]}
+    client.global.db.query(`INSERT INTO sweebData SET ?`, dataPic)
 
     client.global.message.success(message, "Upload", `Successfully uploaded the image to /\`${args[0]}\`/`);
   };
