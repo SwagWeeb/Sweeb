@@ -8,8 +8,8 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     
     var val = args[2].toLowerCase() === false;
     if (typeof val !== "boolean") return client.global.message.error(message, "not_bool", "Not a boolean! for NSFW tag use \`true/false\`!", "(NOT_A_BOOLEAN)");
-    var datetime = require('moment')
-    const timestamps = datetime.format("MM-DD-YYYY")
+    const moment = require('moment')
+    const timestamps = moment.format("MM-DD-YYYY")
     
     client.global.db.query(`INSERT INTO sweebData (id, category, nsfw, dateAdded, fileLink) VALUES (${client.global.createId(20)}, "${args[0].toProperCase()}", ${args[2].toLowerCase()}, STR_TO_DATE(${timestamps}, '%d-%m-%Y'), "${args[1]}")`)
 
