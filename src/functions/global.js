@@ -6,7 +6,9 @@ module.exports = (client) => {
     client.global.truncate = require('./truncate'),
     client.global.message = new Embed(client),
     client.global.db = require('../database/mysql'),
+    client.global.escapeDB = require('../database/escaping')
     client.global.categories = ["Pat", "Hug", "Kiss", "Highfive", "Heart", "Cry"],
+    client.global.isUrl = require('./isUrl'),
 
     client.permlevel = (message) => {
         let permlvl = 0;
@@ -20,5 +22,11 @@ module.exports = (client) => {
             }
         }
         return permlvl;
+    };
+
+    String.prototype.toProperCase = function() {
+        return this.replace(/([^\W_]+[^\s-]*) */g, function(txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
     };
 };

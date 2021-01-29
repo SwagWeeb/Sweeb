@@ -24,6 +24,18 @@ class Embed {
             embed.setColor("#ca5252")
             .setTitle("Error: (LEVEL_NOT_MET)")
             .setDescription(title)
+        } else if (type == "not_url") {
+            embed.setColor("#ca5252")
+            .setTitle("Error: (NOT_A_URL)")
+            .setDescription(title)
+        } else if (type == "not_category") {
+            embed.setColor("#ca5252")
+            .setTitle("Error: (NOT_A_CATEGORY)")
+            .setDescription(title)
+        } else if (type == "not_bool") {
+            embed.setColor("#ca5252")
+            .setTitle("Error: (NOT_A_BOOLEAN)")
+            .setDescription(title)
         }
         //if (fields != (typeof Object)) return client.logger.error("Field must be a type of (Object)")
         return message.channel.send({embed: embed});
@@ -34,7 +46,7 @@ class Embed {
         if (typeof title !== "string") return this._client.logger.error("Title must be a type of (String)")
         if (typeof body !== "string") return this._client.logger.error("Body must be a type of (String)")
         //if (fields != typeof Object) return this._client.logger.error("Field must be a type of (Object)")
-        embed.setColor("#ca5252")
+        embed.setColor("#74d557")
         .setTitle(title)
         .setDescription(body)
         message.channel.send({embed: embed})
