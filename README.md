@@ -8,3 +8,7 @@
 
  > currently supported endpoints
  > /pat /hug
+
+ - if you would like to upload to the database
+ - please contact me on discord or email me!
+ - Phil#0004 | admin@cyci.org
