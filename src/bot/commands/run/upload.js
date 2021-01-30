@@ -11,10 +11,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     var dayjs = require('dayjs')
     const timestamp = dayjs(new Date()).format("YYYY,MM,DD");
     
-    client.global.db.query(`INSERT INTO sweebData (id, category, nsfw, dateAdded, fileLink) VALUES (${client.global.createId(14)}, "${args[0].toProperCase()}", false, '${timestamp}', "${args[1]}")`)
-    .on('error', function(err) {
-      console.log(err);
-    })
+    client.global.db.query(`INSERT INTO sweebData (id, category, nsfw, dateAdded, fileLink) VALUES (${client.global.createId(14)}, "${args[0].toProperCase()}", false, '${timestamp}', "${args[1]}")`);
 
 
     client.global.message.success(message, "Upload", `Successfully uploaded the image to /\`${args[0]}\`/`);

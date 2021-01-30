@@ -12,8 +12,12 @@ router.get('/:category', async function(req, res) {
     log.log(`[Sweeb] /${categoryFix.toUpperCase()}/ requested by ${ip}`)
     if (!req.headers.authorization) return res.status(403).json({ error: 'no_token' });
     if (req.headers.authorization !== process.env.SERVER_KEY) return res.status(403).json({ error: 'unauthorized' });
-    const cat = db.query(`SELECT * FROM sweebData WHERE category = "${categoryFix.toUpperCase()}"`),
-    random = cat[Math.floor(Math.random()*cat.length)];
+    client.global.db.query(`SELECT * FROM sweebData WHERE category = "Pat"`, function(err, data) {
+        const pic = data[Math.floor(Math.random()*data.length)]
+        console.log(pic);
+        return res.send(200).json({url: pic.url, id: pic.id, category: pic.category, added: pic.dateAdded});
+    })
+    
 
    // res.status(200).json({category: random.category, url: random.fileLink})
 })
