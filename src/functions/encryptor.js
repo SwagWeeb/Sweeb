@@ -1,4 +1,4 @@
-var encryptor = require('simple-encryptor')(process.env.ENC_KEY);
+var encryptor = require('simple-encryptor')(`${process.env.ENC_KEY}`);
 const enc = function handler(type, data) {
     if (!data) return null;
     if (type == 1) {
