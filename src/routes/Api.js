@@ -14,12 +14,10 @@ router.get('/:category', async function(req, res) {
     //if (req.headers.authorization !== process.env.SERVER_KEY) return res.status(403).json({ error: 'unauthorized' });
     db.query(`SELECT * FROM sweebData WHERE category = "Pat"`, function(err, data) {
         const pic = data[Math.floor(Math.random()*data.length)]
-        console.log(pic);
         return res.json({url: pic.fileLink, id: pic.id, category: pic.category, added: pic.dateAdded});
     })
-    
-
-   // res.status(200).json({category: random.category, url: random.fileLink})
+    const test = await db.query(`SELECT * FROM sweebData WHERE category = "Pat"`)
+    console.log(test);
 })
 
 router.get('/upload/:ID/:File', function(req, res) {
