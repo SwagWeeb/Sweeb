@@ -16,7 +16,7 @@ router.get('/:category', async function(req, res) {
     db.query(`SELECT * FROM sweebData WHERE category = "Pat"`, function(err, data) {
         const pic = data[Math.floor(Math.random()*data.length)]
         console.log(pic);
-        return res.send(200).json({url: pic.url, id: pic.id, category: pic.category, added: pic.dateAdded});
+        return res.json({url: pic.url, id: pic.id, category: pic.category, added: pic.dateAdded});
     })
     
 
