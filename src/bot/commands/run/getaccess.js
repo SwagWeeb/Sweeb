@@ -1,6 +1,6 @@
 exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
     client.global.db.query(`SELECT * FROM sweebAPI WHERE id = "${message.author.id}"`, function(err, data) {
-        if (data[0].id == undefined || null) {
+        if (data[0] == undefined || null) {
             const token = client.global.enc(1, client.global.createToken(30))
             try {
             client.global.db.query(`INSERT INTO sweebData (id, apiToken) VALUES (${message.author.id}, "${token}")`).on('error', function(e){})
