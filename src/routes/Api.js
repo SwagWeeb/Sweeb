@@ -6,7 +6,6 @@ const db = require('../database/mysql');
 router.get('/:category', async function(req, res) {
     if (!req.params) return res.status(403).json({ error: 'Choose a correct path' });
     const categoryFix = req.params.category;
-    console.log(categoryFix);
 
     if (!res.locals.bot.global.categories.includes(categoryFix.toProperCase())) return res.status(403).json({ error: 'unauthorized' });
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
@@ -16,7 +15,7 @@ router.get('/:category', async function(req, res) {
     db.query(`SELECT * FROM sweebData WHERE category = "Pat"`, function(err, data) {
         const pic = data[Math.floor(Math.random()*data.length)]
         console.log(pic);
-        return res.json({url: pic.url, id: pic.id, category: pic.category, added: pic.dateAdded});
+        return res.json({url: pic.fileLink, id: pic.id, category: pic.category, added: pic.dateAdded});
     })
     
 
