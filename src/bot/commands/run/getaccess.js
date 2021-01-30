@@ -20,7 +20,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     guildOnly: false,
     aliases: ["getaccess", "access", "gettoken"],
     permLevel: "User",
-    cooldown: 500
+    cooldown: 10
   };
   
   exports.help = {
