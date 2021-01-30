@@ -10,7 +10,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
             }
         } else {
             client.global.message.success(message, "channel","DMS", `check dms! for your requested API token!`)
-            client.global.message.success(message, "dm", "API token", `this is your API token keep it safe!\n\`${token}\``)
+            client.global.message.success(message, "dm", "API token", `this is your API token keep it safe!\n\`${data[0].apiToken}\``)
         }
     })
   };
