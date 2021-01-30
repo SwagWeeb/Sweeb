@@ -6,13 +6,10 @@ exports.run = async (client, message, args, level) => {
     message.delete();
         if (args < 1) return message.reply("You must provide some (JS) code to eval!");
         if (args > 1999) return message.reply("You may not have more than 2,000 in this EVAL \n returns nothing");
-       
         try {
-
             const evaled = eval(code);
             const clean = await client.clean(client, evaled);
-            const code3 = Math.floor(Math.random() * (99999999 - 11111111)) + 11111111;
-
+            const code3 = client.global.createId(10)
             // Self explanitory. creates Embed
             const embed = new Discord.MessageEmbed()
                 .setTitle("Eval Request Code - " + code3)
@@ -21,7 +18,6 @@ exports.run = async (client, message, args, level) => {
                 .addField("**OutPut**:", "\`\`\`" + clean + " \`\`\`")
                 .setTimestamp(new Date())
                 .setFooter(message.author.username, message.author.avatarURL)
-
             // sends embed above ^^^^
             message.channel.send({
                 embed
