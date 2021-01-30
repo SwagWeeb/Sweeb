@@ -6,8 +6,9 @@ const db = require('../database/mysql');
 router.get('/:category', async function(req, res) {
     if (!req.params) return res.status(403).json({ error: 'Choose a correct path' });
     const categoryFix = req.params.category;
+    console.log(categoryFix);
 
-    if (!res.locals.bot.global.categories.includes(categoryFix.toUpperCase())) return res.status(403).json({ error: 'unauthorized' });
+    if (!res.locals.bot.global.categories.includes(categoryFix.toProperCase())) return res.status(403).json({ error: 'unauthorized' });
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     log.log(`[Sweeb] /${categoryFix.toUpperCase()}/ requested by ${ip}`)
     //if (!req.headers.authorization) return res.status(403).json({ error: 'no_token' });
