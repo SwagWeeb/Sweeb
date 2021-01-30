@@ -8,8 +8,7 @@ module.exports = {
             events = [],
             eventNameIndex = {};
 
-        pool.getConnection()
-        .then(function (err, conn) {
+        pool.getConnection(function (err, conn) {
             if (err) {
                 if (eventNameIndex.error) {
                     eventNameIndex.error();
