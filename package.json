@@ -28,7 +28,6 @@
     "discord.js": "^12.5.1",
     "express": "^4.17.1",
     "express-rate-limit": "^5.2.3",
-    "moment": "^2.29.1",
     "mysql": "^2.18.1"
   }
 }
