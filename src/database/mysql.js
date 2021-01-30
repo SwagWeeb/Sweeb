@@ -1,5 +1,5 @@
 // MYSQL connection by AJ/TheOnlyKirb adds a promising feature for faster DB usage
-const mariadb = require('promise-mysql');
+const mariadb = require('mysql');
 mariadb.escape
 const pool = mariadb.createPool({host: process.env.MYSQL_ADDRESS, user: process.env.MYSQL_USER, password: process.env.MYSQL_PASS, database: process.env.MYSQL_DB, port: process.env.MYSQL_PORT, connectionLimit: 4000});
 module.exports = {
@@ -8,10 +8,8 @@ module.exports = {
             events = [],
             eventNameIndex = {};
 
-        pool.then(function(p){  
-            console.log(p.getConnection())
-            return p.getConnection()
-        }).then(function (err, conn) {
+        pool.getConnection()
+        .then(function (err, conn) {
             if (err) {
                 if (eventNameIndex.error) {
                     eventNameIndex.error();
