@@ -16,7 +16,7 @@ router.get('/:category', async function(req, res) {
         const pic = data[Math.floor(Math.random()*data.length)]
         return res.json({url: pic.fileLink, id: pic.id, category: pic.category, added: pic.dateAdded});
     })
-    const test = await db.query(`SELECT * FROM sweebData WHERE category = "Pat"`)
+    const test = await db.query(`SELECT * FROM sweebData WHERE category = "Pat"`).on('results', function(e){return e;})
     console.log(test);
 })
 
