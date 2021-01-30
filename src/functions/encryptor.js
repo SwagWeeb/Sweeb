@@ -1,5 +1,5 @@
 console.log(process.env.ENC_KEY);
-var encryptor = require('simple-encryptor')(process.env.ENC_KEY);
+var encryptor = require('simple-encryptor')(process.env.BOT_WEBHOOK_TOKEN); // cheeky :mm:
 const enc = function handler(type, data) {
     if (!data) return null;
     if (type == 1) {
