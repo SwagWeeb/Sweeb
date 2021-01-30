@@ -1,11 +1,11 @@
-const moment = require("moment");
+const dayjs = require("dayjs");
 const {MessageEmbed, WebhookClient} = require("discord.js")
 const embed = new MessageEmbed();
 const wk = new WebhookClient(process.env.BOT_WEBHOOK_ID, process.env.BOT_WEBHOOK_TOKEN);
 const truncate = require('./truncate')
 
 exports.log = (content, type = "log") => {
-  const timestamp = moment().format("YYYY-MM-DD HH:mm:ss");
+  const timestamp = dayjs(new Date()).format("YYYY-MM-DD HH:mm:ss");
   switch (type) {
     case "log": 
     console.log(`${timestamp} ${type.toUpperCase()} ${content} `);

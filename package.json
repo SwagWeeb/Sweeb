@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/SwagWeeb/Sweeb#readme",
   "dependencies": {
+    "dayjs": "^1.10.4",
     "discord.js": "^12.5.1",
     "express": "^4.17.1",
     "express-rate-limit": "^5.2.3",

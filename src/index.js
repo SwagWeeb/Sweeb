@@ -13,10 +13,10 @@ require('./functions/global')(client);
 app.set('trust proxy', 1);
 
 // File logging from AJ/TheOnlyKirb
-const moment = require("moment");
+var dayjs = require("dayjs");
 const fs = require("fs");
 var util = require('util');
-const timestamps = `${moment().format("MM-DD-YYYY")}`
+const timestamps = `${dayjs(new Date()).format("MM-DD-YYYY")}`
 var logFile = fs.createWriteStream(`./src/logs/log-${timestamps}.txt`, { flags: 'a' });
 var logStdout = process.stdout;
 console.log = function () {
