@@ -3,11 +3,14 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
         if (data[0] == undefined || null) {
             const token = client.global.enc(1, client.global.createToken(30))
             try {
-            client.global.db.query(`INSERT INTO sweebData (id, apiToken) VALUES (${message.author.id}, "${token}")`).on('error', function(e){})
+            client.global.db.query(`INSERT INTO sweebAPI (id, apiToken) VALUES (${message.author.id}, "${token}")`).on('error', function(e){ client.global.log.log("Bad MYSQL request! contact the mods at ONCE!")})
             } finally {
                 client.global.message.success(message, "channel","Success", `Your api token has been created! check dms!`)
                 client.global.message.success(message, "dm", "API token", `this is your API token keep it safe!\n\`${token}\``)
             }
+        } else {
+            client.global.message.success(message, "channel","DMS", `check dms! for your requested API token!`)
+            client.global.message.success(message, "dm", "API token", `this is your API token keep it safe!\n\`${token}\``)
         }
     })
   };
