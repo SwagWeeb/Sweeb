@@ -1,10 +1,7 @@
 exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
 
-  const test = "";
-client.global.db.query(`SELECT * FROM sweebData`, function (error, memberData) {
-  console.log(error);
-  console.log(memberData);
-})
+  const test = await client.global.db.query(`SELECT * FROM sweebData`);
+  console.log(test);
   };
   
   exports.conf = {
