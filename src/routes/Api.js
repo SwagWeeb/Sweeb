@@ -11,7 +11,7 @@ router.get('/:category', async function(req, res) {
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     log.log(`[Sweeb] /${categoryFix.toUpperCase()}/ requested by ${ip}`)
     if (!req.headers.authorization) return res.status(403).json({ error: 'no_token' });
-    db.query(`SELECT * FROM sweebAPI WHERE category = "${req.headers.authorization}"`, function(err, data) {
+    db.query(`SELECT * FROM sweebAPI WHERE apiToken = "${req.headers.authorization}"`, function(err, data) {
         if (data == undefined) return res.status(403).json({ error: 'unauthorized' });
         else db.query(`SELECT * FROM sweebData WHERE category = "${categoryFix.toProperCase()}"`, function(err, data) {
             const pic = data[Math.floor(Math.random()*data.length)]
