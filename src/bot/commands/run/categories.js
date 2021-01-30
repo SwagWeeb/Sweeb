@@ -1,6 +1,6 @@
 exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
     const cats = client.global.categories.join(', ')
-    client.global.message.success(message, "Categories", `Current categories available!\n \`${cats}\``);
+    client.global.message.success(message, "channel", "Categories", `Current categories available!\n \`${cats}\``);
   };
   
   exports.conf = {

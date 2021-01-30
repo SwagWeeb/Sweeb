@@ -36,20 +36,29 @@ class Embed {
             embed.setColor("#ca5252")
             .setTitle("Error: (NOT_A_BOOLEAN)")
             .setDescription(title)
+        } else if (type == "cant_message") {
+            embed.setColor("#ca5252")
+            .setTitle("Error: (CANNOT_MESSAGE_USER)")
+            .setDescription(title)
         }
-        //if (fields != (typeof Object)) return client.logger.error("Field must be a type of (Object)")
         return message.channel.send({embed: embed});
     }
 
-   async success(message, title, body) {
+   async success(message, type, title, body) {
         if (!message) return;
         if (typeof title !== "string") return this._client.logger.error("Title must be a type of (String)")
         if (typeof body !== "string") return this._client.logger.error("Body must be a type of (String)")
-        //if (fields != typeof Object) return this._client.logger.error("Field must be a type of (Object)")
+        if (type.toLowerCase() == "dm") {
+            embed.setColor("#74d557")
+        .setTitle(title)
+        .setDescription(body)
+        message.author.send({embed: embed}).catch(e => this.error(message, "cant_message", `Sorry ${message.author.tag}, it seems i cannot message you!\n re-run this command with DM's enabled!`, "CANNOT_MESSAGE_USER"))
+        } else if (type.toLowerCase() == "channel") {
         embed.setColor("#74d557")
         .setTitle(title)
         .setDescription(body)
         message.channel.send({embed: embed})
+        }
     }
 
     

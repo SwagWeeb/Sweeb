@@ -9,7 +9,16 @@ module.exports = (client) => {
     client.global.escapeDB = require('../database/escaping')
     client.global.categories = ["Pat", "Hug", "Kiss", "Highfive", "Heart", "Cry"],
     client.global.isUrl = require('./isUrl'),
-
+    client.global.enc = require('./encryptor'),
+    client.global.createToken = (length) => {
+        var a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".split("");
+        var b = [];
+        for (var i = 0; i < length; i++) {
+            var j = (Math.random() * (a.length - 1)).toFixed(0);
+            b[i] = a[j];
+        }
+        return b.join("");
+    },
     client.clean = async (client, text) => {
         if (text && text.constructor.name == "Promise") text = await text;
         if (typeof evaled !== "string") text = require("util").inspect(text, {
@@ -31,7 +40,6 @@ module.exports = (client) => {
         }
         return permlvl;
     },
-
     String.prototype.toProperCase = function() {
         return this.replace(/([^\W_]+[^\s-]*) */g, function(txt) {
             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
