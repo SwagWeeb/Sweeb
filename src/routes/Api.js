@@ -10,8 +10,8 @@ router.get('/:category', async function(req, res) {
     if (!res.locals.bot.global.categories.includes(categoryFix.toUpperCase())) return res.status(403).json({ error: 'unauthorized' });
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     log.log(`[Sweeb] /${categoryFix.toUpperCase()}/ requested by ${ip}`)
-    if (!req.headers.authorization) return res.status(403).json({ error: 'no_token' });
-    if (req.headers.authorization !== process.env.SERVER_KEY) return res.status(403).json({ error: 'unauthorized' });
+    //if (!req.headers.authorization) return res.status(403).json({ error: 'no_token' });
+    //if (req.headers.authorization !== process.env.SERVER_KEY) return res.status(403).json({ error: 'unauthorized' });
     client.global.db.query(`SELECT * FROM sweebData WHERE category = "Pat"`, function(err, data) {
         const pic = data[Math.floor(Math.random()*data.length)]
         console.log(pic);
