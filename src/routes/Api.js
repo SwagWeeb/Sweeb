@@ -10,14 +10,12 @@ router.get('/:category', async function(req, res) {
     if (!res.locals.bot.global.categories.includes(categoryFix.toProperCase())) return res.status(403).json({ error: 'unauthorized' });
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     log.log(`[Sweeb] /${categoryFix.toUpperCase()}/ requested by ${ip}`)
-    //if (!req.headers.authorization) return res.status(403).json({ error: 'no_token' });
-    //if (req.headers.authorization !== process.env.SERVER_KEY) return res.status(403).json({ error: 'unauthorized' });
+    if (!req.headers.authorization) return res.status(403).json({ error: 'no_token' });
+    if (req.headers.authorization !== process.env.SERVER_KEY) return res.status(403).json({ error: 'unauthorized' });
     db.query(`SELECT * FROM sweebData WHERE category = "Pat"`, function(err, data) {
         const pic = data[Math.floor(Math.random()*data.length)]
         return res.json({url: pic.fileLink, id: pic.id, category: pic.category, added: pic.dateAdded});
     })
-    const test = await db.query(`SELECT * FROM sweebData WHERE category = "Pat"`).on('results', function(e){return e;})
-    console.log(test);
 })
 
 router.get('/upload/:ID/:File', function(req, res) {
