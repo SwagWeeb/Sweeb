@@ -1,5 +1,6 @@
 const {MessageEmbed} = require('discord.js');
 const embed = new MessageEmbed().setTimestamp(Date.now());
+const log = require("./log");
 class Embed {
     constructor(client) {
         this._client = client
@@ -15,7 +16,7 @@ class Embed {
         .setTitle(`Error: ${body}`)
         .setDescription(title);
 
-        return message.channel.send({embed: embed});
+        return message.channel.send({embed: embed}).catch(e => {return;})
     }
 
    async success(message, type, title, body, pic = false) {
@@ -27,12 +28,12 @@ class Embed {
             embed.setColor("#74d557")
         .setTitle(title)
         .setDescription(body)
-        message.author.send({embed: embed}).catch(e => this.error(message, "cant_message", `Sorry ${message.author.tag}, it seems i cannot message you!\n re-run this command with DM's enabled!`, "CANNOT_MESSAGE_USER"))
+        message.author.send({embed: embed}).catch(e => this.error(message, `Sorry ${message.author.tag}, it seems i cannot message you!\n re-run this command with DM's enabled!`, "CANNOT_MESSAGE_USER"))
         } else if (type.toLowerCase() == "channel") {
         embed.setColor("#74d557")
         .setTitle(title)
         .setDescription(body)
-        message.channel.send({embed: embed})
+        message.channel.send({embed: embed}).catch(e => {return;})
         }
     }
 
