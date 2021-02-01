@@ -7,40 +7,14 @@ class Embed {
         embed.setThumbnail("https://cdn.discordapp.com/attachments/560253001051406336/804465303261544459/e17da370e6775bcc6ad4d9d6e52ab833.png")
     }
 
-   async error(message, type, title, body) {
+   async error(message, title, body) {
         if (!message) return;
-        if (typeof type !== "string") return this._client.logger.error("Type must be a type of (String)")
         if (typeof title !== "string") return this._client.logger.error("Title must be a type of (String)")
         // if (typeof body !== "string") return this._client.logger.error("Body must be a type of (String)")
-        if (type == "no_arg") {
-            embed.setColor("#ca5252")
-            .setTitle("Error: (NO_ARG)")
-            .setDescription(title)
-        } else if (type == "command_cooldown") {
-            embed.setColor("#ca5252")
-            .setTitle("Error: (COMMAND_ON_COOLDOWN)")
-            .setDescription(title)
-        } else if (type == "level_not_met") {
-            embed.setColor("#ca5252")
-            .setTitle("Error: (LEVEL_NOT_MET)")
-            .setDescription(title)
-        } else if (type == "not_url") {
-            embed.setColor("#ca5252")
-            .setTitle("Error: (NOT_A_URL)")
-            .setDescription(title)
-        } else if (type == "not_category") {
-            embed.setColor("#ca5252")
-            .setTitle("Error: (NOT_A_CATEGORY)")
-            .setDescription(title)
-        } else if (type == "not_bool") {
-            embed.setColor("#ca5252")
-            .setTitle("Error: (NOT_A_BOOLEAN)")
-            .setDescription(title)
-        } else if (type == "cant_message") {
-            embed.setColor("#ca5252")
-            .setTitle("Error: (CANNOT_MESSAGE_USER)")
-            .setDescription(title)
-        }
+        embed.setColor("#ca5252")
+        .setTitle(`Error: ${body}`)
+        .setDescription(title);
+
         return message.channel.send({embed: embed});
     }
 
