@@ -5,12 +5,9 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     if (!client.global.categories.includes(args[0].toProperCase())) return client.global.message.error(message, `Not a valid category!\n do \`sw!categories\` to see a list!`, "(NOT_A_CATEGORY)");
     if (!client.global.isUrl(args[1])) return client.global.message.error(message, "Not a valid url!", "(NOT_A_URL)");
     var isAdded = false;
-    client.global.db.query(`SELECT * FROM sweebData where category = '${args[0].toProperCase()}'`, function(err, data) {
+    client.global.db.query(`SELECT * FROM sweebData where fileLink = '${args[1]}'`, function(err, data) {
         if (!data) return; // silently return nothing as database may not be initialized
-        for (var i = 0; i < data.length; i++) {
-            const pic = data[i];
-            if (pic.fileLink == args[1]) return isAdded = true;
-        }
+        if (data[0].fileLink == args[1]) return isAdded = true;
     })
     if (!isAdded) {
       var dayjs = require('dayjs')
