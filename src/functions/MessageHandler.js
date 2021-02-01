@@ -18,10 +18,11 @@ class Embed {
         return message.channel.send({embed: embed});
     }
 
-   async success(message, type, title, body) {
+   async success(message, type, title, body, pic = false) {
         if (!message) return;
         if (typeof title !== "string") return this._client.logger.error("Title must be a type of (String)")
         if (typeof body !== "string") return this._client.logger.error("Body must be a type of (String)")
+        if (pic) embed.setImage(pic);
         if (type.toLowerCase() == "dm") {
             embed.setColor("#74d557")
         .setTitle(title)
