@@ -6,7 +6,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     if (!client.global.isUrl(args[1])) return client.global.message.error(message, "Not a valid url!", "(NOT_A_URL)");
     client.global.db.query(`SELECT * FROM sweebData where fileLink = ${client.global.escapeDB(args[1])}`, function(err, data) {
         if (!data) return; // silently return nothing as database may not be initialized
-        if (data[0].fileLink == args[1]) return client.global.message.error(message, `Link already present in Database under \`${data[0].category}\``, "(LINK_IN_DB)")
+        if (data[0] !== undefined) return client.global.message.error(message, `Link already present in Database under \`${data[0].category}\``, "(LINK_IN_DB)")
         else {
           var dayjs = require('dayjs')
           const timestamp = dayjs(new Date()).format("YYYY,MM,DD");
