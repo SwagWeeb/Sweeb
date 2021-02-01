@@ -5,7 +5,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     if (!client.global.categories.includes(args[0].toProperCase())) return client.global.message.error(message, `Not a valid category!\n do \`sw!categories\` to see a list!`, "(NOT_A_CATEGORY)");
     if (!client.global.isUrl(args[1])) return client.global.message.error(message, "Not a valid url!", "(NOT_A_URL)");
     var isAdded = false;
-    client.global.db.query(`SELECT * FROM sweebData where fileLink = ${args[1]}`, function(err, data) {
+    client.global.db.query(`SELECT * FROM sweebData where fileLink = ${client.global.escapeDB(args[1])}`, function(err, data) {
         if (!data) return; // silently return nothing as database may not be initialized
         isAdded = true;
         console.log("EEEEE " + isAdded);
