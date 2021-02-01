@@ -7,7 +7,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     var isAdded = false;
     client.global.db.query(`SELECT * FROM sweebData where fileLink = ${args[1]}`, function(err, data) {
         if (!data) return; // silently return nothing as database may not be initialized
-        if (data[0]) return isAdded = true;
+        isAdded = true;
         console.log("EEEEE " + isAdded);
     })
   //   if (!isAdded) {
