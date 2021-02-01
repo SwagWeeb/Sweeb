@@ -4,7 +4,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     if (!args[1]) return client.global.message.error(message, `You did not provide any arguments! \`sw!upload <Link> <Category>\``, "(NO_ARG)");
     if (!client.global.categories.includes(args[0].toProperCase())) return client.global.message.error(message, `Not a valid category!\n do \`sw!categories\` to see a list!`, "(NOT_A_CATEGORY)");
     if (!client.global.isUrl(args[1])) return client.global.message.error(message, "Not a valid url!", "(NOT_A_URL)");
-    const test = false;
+    var test = false;
     client.global.db.query(`SELECT * FROM sweebData where category = '${args[0].toProperCase()}'`, function(err, data) {
       if (!data) return; // silently return nothing as database may not be initialized
       for (var i = 0; i < data.length; i++) {
