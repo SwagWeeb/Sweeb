@@ -5,15 +5,16 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     if (!client.global.categories.includes(args[0].toProperCase())) return client.global.message.error(message, `Not a valid category!\n do \`sw!categories\` to see a list!`, "(NOT_A_CATEGORY)");
     if (!client.global.isUrl(args[1])) return client.global.message.error(message, "Not a valid url!", "(NOT_A_URL)");
     const test = false;
-    client.global.db.query(`SELECT * FROM sweebData`, function(err, data) {
+    this._test = test;
+    client.global.db.query(`SELECT * FROM sweebData where category = '${args[0].toProperCase()}'`, function(err, data) {
       if (!data) return; // silently return nothing as database may not be initialized
       for (var i = 0; i < data.length; i++) {
         const pic = data[i];
-        if (pic.fileLink == args[1] && !test) return test = true;
+        if (pic.fileLink == args[1] && !this._test) return this._test = true;
         else return;
       }
   })
-    if (test) return client.global.message.error(message, `Link already present in Database under \`${pic.category}\``, "(LINK_IN_DB)");
+    if (this._test) return client.global.message.error(message, `Link already present in Database under \`${pic.category}\``, "(LINK_IN_DB)");
     var dayjs = require('dayjs')
     const timestamp = dayjs(new Date()).format("YYYY,MM,DD");
     client.global.db.query(`INSERT INTO sweebData (id, category, nsfw, dateAdded, fileLink) VALUES (${client.global.createId(14)}, "${args[0].toProperCase()}", false, '${timestamp}', "${args[1]}")`);
