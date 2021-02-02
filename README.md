@@ -33,3 +33,8 @@ callWump()
 > to become an image uploader please contact our team here
 staff@cyci.org | or join here (https://discord.gg/4ht2dWjaHP) and message Phil#0004
 
+#### Powered by
+- Tenor
+- Giphy
+- wumpfetch
+
