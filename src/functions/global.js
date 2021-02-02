@@ -10,6 +10,7 @@ module.exports = (client) => {
     client.global.categories = ["Pat", "Hug", "Kiss", "Highfive", "Heart", "Cry", "Slap"],
     client.global.isUrl = require('./isUrl'),
     client.global.enc = require('./encryptor'),
+    client.global.checkUrl = require('./checkUrlUpload'),
     client.global.createToken = (length) => {
         var a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".split("");
         var b = [];

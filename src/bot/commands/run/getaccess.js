@@ -1,7 +1,7 @@
 exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
     client.global.db.query(`SELECT * FROM sweebAPI WHERE id = "${message.author.id}"`, function(err, data) {
         if (data[0] == undefined || null) {
-            const token = client.global.enc(1, client.global.createToken(30))
+            const token = client.global.enc(1, client.global.createToken(20) + message.author.id)
             try {
             client.global.db.query(`INSERT INTO sweebAPI (id, apiToken) VALUES (${message.author.id}, "${token}")`).on('error', function(e){ client.global.log.log("Bad MYSQL request! contact the mods at ONCE!")})
             } finally {
