@@ -10,7 +10,7 @@
 
 > note you need to invite the bot/join the discord server to create an API token
 
-> current Categories /pat/ /hug/
+> current Categories "Pat", "Hug", "Kiss", "Highfive", "Heart", "Cry", "Slap", "Bonk", "Kill", "Snuggle", "Poke", "Blush", "Confused", "Wave", "Nosebleed", "ThumbsUp", "Stare", "Smile", "Laugh", "Angry", "Smug", "Panic", "Wow", "Shocked", "HoldHand", "Grab", "Worried", "Sweat", "Cringe", "Wtf", "Bliss", "Highfive", "Shoot", "Cheer", "Lick", "Nom", "Run", "Pout", "Nod", "No", "Bully", "Tease", "Hide", "Peck", "Drool", "QuestioningExistance", "Cool", "Done", "Popcorn", "Lurk", "WakeUp", "Sleep", "Jump", "Fangirling", "Sip", "Dance"
 
 ```js
 const w = require('wumpfetch');
