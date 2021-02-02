@@ -9,8 +9,9 @@ async function check(url) {
     else if (giphyMedia.exec(url) !== null) result = url;
     else if (tenor.exec(url) !== null) {
         const r = await w({
-            url: `https://api.tenor.com/v1/gifs?ids=${tenor.exec("https://tenor.com/view/kiss-anime-love-gif-9158317")[1]}&key=${process.env.TENOR_KEY}`,
+            url: `https://api.tenor.com/v1/gifs?ids=${tenor.exec(url)[1]}&key=${process.env.TENOR_KEY}`,
             method: 'GET',
+            headers: {'User-Agent': `Sweeb API - (1.0.0-BETA)`,}
         }).send()
         
         result = r.json()['results'][0]['media'][0]['gif']['url'];
