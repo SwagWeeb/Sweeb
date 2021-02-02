@@ -11,7 +11,7 @@ async function check(url) {
         const r = await w({
             url: `https://api.tenor.com/v1/gifs?ids=${tenor.exec(url)[1]}&key=${process.env.TENOR_KEY}`,
             method: 'GET',
-            headers: {'User-Agent': `Sweeb API - (1.0.0-BETA)`,}
+            headers: {'User-Agent': `Sweeb API - (1.0.0-BETA)`}
         }).send()
         
         result = r.json()['results'][0]['media'][0]['gif']['url'];
