@@ -7,7 +7,7 @@ module.exports = (client) => {
     client.global.message = new Embed(client),
     client.global.db = require('../database/mysql'),
     client.global.escapeDB = require('../database/escaping')
-    client.global.categories = ["Pat", "Hug", "Kiss", "Highfive", "Heart", "Cry"],
+    client.global.categories = ["Pat", "Hug", "Kiss", "Highfive", "Heart", "Cry", "Slap"],
     client.global.isUrl = require('./isUrl'),
     client.global.enc = require('./encryptor'),
     client.global.createToken = (length) => {
