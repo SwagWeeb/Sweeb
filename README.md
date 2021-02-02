@@ -37,4 +37,5 @@ staff@cyci.org | or join here (https://discord.gg/4ht2dWjaHP) and message Phil#0
 - Tenor
 - Giphy
 - wumpfetch
+- discord.js
 
