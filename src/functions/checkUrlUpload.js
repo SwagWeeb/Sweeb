@@ -13,7 +13,7 @@ async function check(url) {
             method: 'GET',
         }).send()
         
-        result = r.json().results[0].media[0].gif.url;
+        result = r.json()['results'][0]['media'][0]['gif']['url'];
     }
     else result = url;
     return result;
