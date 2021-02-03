@@ -16,8 +16,6 @@ router.get('/:category', async function(req, res) {
         else db.query(`SELECT * FROM sweebData WHERE category = "${categoryFix.toProperCase()}"`, function(err, data) {
             if (data == undefined) return res.staus(400).json({ error: 'data_not_found'})
             const pic = data[Math.floor(Math.random()*data.length)]
-
-            console.log(pic);
             if (pic == undefined) return res.status(400).json({ error: 'data_not_found'})
             return res.json({url: pic.fileLink, id: pic.id, category: pic.category, added: pic.dateAdded});
         })
