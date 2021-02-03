@@ -14,7 +14,7 @@ router.get('/:category', async function(req, res) {
     db.query(`SELECT * FROM sweebAPI WHERE apiToken = "${req.headers.authorization}"`, function(err, data) {
         if (data == undefined) return res.status(401).json({ error: 'unauthorized' });
         else db.query(`SELECT * FROM sweebData WHERE category = "${categoryFix.toProperCase()}"`, function(err, data) {
-            if (!data) return res.staus(400).json({ error: 'data_not_found'})
+            if (data == undefined) return res.staus(400).json({ error: 'data_not_found'})
             const pic = data[Math.floor(Math.random()*data.length)]
             return res.json({url: pic.fileLink, id: pic.id, category: pic.category, added: pic.dateAdded});
         })
