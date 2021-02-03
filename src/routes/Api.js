@@ -9,7 +9,8 @@ router.get('/:category', async function(req, res) {
 
     if (!res.locals.bot.global.categories.includes(categoryFix.toProperCase())) return res.status(401).json({ error: 'unauthorized' });
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    log.log(`[Sweeb] /${categoryFix.toUpperCase()}/ requested by ${ip}`)
+    const who = req.headers['User-Agent'] || "Undefined (1.0.0)";
+    log.log(`[Sweeb] /${categoryFix.toUpperCase()}/ requested by ${ip} - ${who}`)
     if (!req.headers.authorization) return res.status(401).json({ error: 'no_token' });
     db.query(`SELECT * FROM sweebAPI WHERE apiToken = "${req.headers.authorization}"`, function(err, data) {
         if (data == undefined) return res.status(401).json({ error: 'unauthorized' });
