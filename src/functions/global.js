@@ -7,7 +7,7 @@ module.exports = (client) => {
     client.global.message = new Embed(client),
     client.global.db = require('../database/mysql'),
     client.global.escapeDB = require('../database/escaping')
-    client.global.categories = ["Pat", "Hug", "Kiss", "Highfive", "Heart", "Cry", "Slap", "Bonk", "Kill", "Snuggle", "Poke", "Blush", "Confused", "Wave", "Nosebleed", "ThumbsUp", "Stare", "Smile", "Laugh", "Angry", "Smug", "Panic", "Wow", "Shocked", "HoldHand", "Grab", "Worried", "Sweat", "Cringe", "Wtf", "Bliss", "Highfive", "Shoot", "Cheer", "Lick", "Nom", "Run", "Pout", "Nod", "No", "Bully", "Tease", "Hide", "Peck", "Drool", "QuestioningExistance", "Cool", "Done", "Popcorn", "Lurk", "WakeUp", "Sleep", "Jump", "Fangirling", "Sip", "Dance"],
+    client.global.categories = ["Pat", "Hug", "Kiss", "Highfive", "Heart", "Cry", "Slap", "Bonk", "Kill", "Snuggle", "Poke", "Blush", "Confused", "Wave", "Nosebleed", "ThumbsUp", "Stare", "Smile", "Laugh", "Angry", "Smug", "Panic", "Wow", "Shocked", "HoldHand", "Grab", "Worried", "Sweat", "Cringe", "Wtf", "Bliss", "Highfive", "Shoot", "Cheer", "Lick", "Nom", "Run", "Pout", "Nod", "No", "Bully", "Tease", "Hide", "Peck", "Drool", "QuestioningExistance", "Cool", "Done", "Popcorn", "Lurk", "WakeUp", "Sleep", "Jump", "Fangirling", "Sip", "Dance", "Punch", "Bite"],
     client.global.isUrl = require('./isUrl'),
     client.global.enc = require('./encryptor'),
     client.global.checkUrl = require('./checkUrlUpload'),
