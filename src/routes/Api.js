@@ -18,7 +18,7 @@ router.get('/:category', async function(req, res) {
             const pic = data[Math.floor(Math.random()*data.length)]
 
             console.log(pic);
-            if (pic == undefined) return res.staus(400).json({ error: 'data_not_found'})
+            if (pic == undefined) return res.status(400).json({ error: 'data_not_found'})
             return res.json({url: pic.fileLink, id: pic.id, category: pic.category, added: pic.dateAdded});
         })
     })
