@@ -26,7 +26,7 @@ router.get('/categories/:Type', function(req, res) {
     if (req.params) {
         if (!res.locals.bot.global.categories.includes(categoryFix.toProperCase())) return res.status(401).json({ error: 'unauthorized' });
         db.query(`SELECT * FROM sweebData where category = "${categoryFix.toProperCase()}"`, function(err, data) {
-            if (data || data[0] || data.length == undefined) return res.status(400).json({ error: 'data_not_found'})
+            if (!data || !data[0] || data.length == undefined) return res.status(400).json({ error: 'data_not_found'})
             return res.json({category: categoryFix.toProperCase(), amount: data.length});
         });
     } else return res.json({categories: res.locals.bot.global.categories});
