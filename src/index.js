@@ -32,8 +32,7 @@ const apiLimiter = rateLimit({
 
 async function routing() {
     console.log("[Sweeb] Add routes");
-    app.use('/api/v1', api)
-    app.use("/api/", apiLimiter);
+    app.use('/api/v1', api, apiLimiter);
     app.get('/', function(req, res) { 
         const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress, who = req.headers['user-agent'] || "Undefined (1.0.0)";
         client.global.log.log(`[Sweeb] index requested by ${ip} - ${who}`)
