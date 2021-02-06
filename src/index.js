@@ -23,10 +23,9 @@ console.log = function () {
   logFile.write(util.format.apply(null, arguments) + '\n');
   logStdout.write(util.format.apply(null, arguments) + '\n');
 }
-
 // basic rateLimiting
 const apiLimiter = rateLimit({
-    windowMs: 10 * 60 * 1000, // 10 minutes
+    windowMs: 2 * 60 * 1000, // 2 minutes
     max: 100,
     message: "Too many requests exceeded, please try again in 10 minutes"
 });
@@ -35,7 +34,11 @@ async function routing() {
     console.log("[Sweeb] Add routes");
     app.use('/api/v1', api)
     app.use("/api/", apiLimiter);
-    app.use("/test", (req, res) => res.send("EEEEE"))
+    app.get('/', function(req, res) { 
+        const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress, who = req.headers['user-agent'] || "Undefined (1.0.0)";
+        log.log(`[Sweeb] /${categoryFix.toUpperCase()}/ requested by ${ip} - ${who}`)
+        res.json({result: "frontpage W.I.P bare with us!"});
+    });
 }
 async function bot(client) {
     const cmds = await readdir("./src/bot/commands/run/");
