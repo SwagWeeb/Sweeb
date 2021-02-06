@@ -36,7 +36,7 @@ async function routing() {
     app.use("/api/", apiLimiter);
     app.get('/', function(req, res) { 
         const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress, who = req.headers['user-agent'] || "Undefined (1.0.0)";
-        log.log(`[Sweeb] /${categoryFix.toUpperCase()}/ requested by ${ip} - ${who}`)
+        client.global.log.log(`[Sweeb] index requested by ${ip} - ${who}`)
         res.json({result: "frontpage W.I.P bare with us!"});
     });
 }
